@@ -28,11 +28,12 @@ services:
     build: ./backend
     # The command to run when the container starts. This starts the Uvicorn server.
     # This command adds the '--reload' flag for development purposes, allowing live code reloading.
-    command: /app/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # command: /app/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     # Mounts the app directory on your host into the /app/app directory in the container.
     # This allows for live reloading of your code without rebuilding the image.
     volumes:
-      - ./backend/app:/app/app
+      - ./backend:/app:z
+      - backend_venv:/app/.venv:z
     # Maps port 8000 on your local machine to port 8000 inside the container.
     ports:
       - "8000:8000"
@@ -93,3 +94,4 @@ services:
 # Defines the named volume used by the 'db' service for data persistence.
 volumes:
   postgres_data:
+  backend_venv: {}

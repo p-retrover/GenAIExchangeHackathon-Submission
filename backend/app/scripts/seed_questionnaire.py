@@ -10,10 +10,7 @@ from app.models.assessment import Assessment, Question, Choice
 from app.db.base import Base
 
 async def create_questionnaire():
-    async with engine.begin() as conn:
-        # This command is safe and will not delete existing tables
-        await conn.run_sync(Base.metadata.create_all)
-
+    
     async with AsyncSessionLocal() as session:
         result = await session.execute(
             select(Assessment).where(Assessment.title == "Satori Career Compass")

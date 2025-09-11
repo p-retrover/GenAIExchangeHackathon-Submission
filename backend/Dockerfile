@@ -34,6 +34,11 @@ FROM python:${PYTHON_VERSION}-slim
 # Set the working directory
 WORKDIR /app
 
+# Create a non-root user
+RUN addgroup --gid 1000 user && \
+    adduser --disabled-password --gecos '' --uid 1000 --gid 1000 user
+
+
 # --- THIS IS THE FIRST MAJOR CHANGE ---
 # Instead of guessing the system path, we copy from the predictable virtual environment path.
 COPY --from=builder /app/.venv /app/.venv
@@ -46,6 +51,12 @@ COPY ./app ./app
 COPY alembic.ini ./
 COPY alembic ./alembic/
 
+COPY backend_bootstrap.sh /app/backend_bootstrap.sh
+RUN chmod +x /app/backend_bootstrap.sh
+
+RUN chown -R user:user /app
+USER user
+
 # Expose the port that the application will run on.
 EXPOSE 8000
 
@@ -53,4 +64,5 @@ EXPOSE 8000
 # --- THIS IS THE SECOND MAJOR CHANGE ---
 # We now run the uvicorn command using the executable from inside the virtual environment.
 # This ensures it uses the packages we just installed.
-CMD ["/app/.venv/bin/uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["/app/.venv/bin/uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["sh", "/app/backend_bootstrap.sh"]
