@@ -84,18 +84,6 @@ Access the app: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-## 🌱 Seeding the Database
-
-To use the app, you must first create the database tables and populate the questionnaire.
-
-From the root `satori/` directory, run:
-
-```bash
-    docker-compose exec backend /app/.venv/bin/python -m app.scripts.seed_questionnaire
-```
-<!--  -->
----
-
 ## 🔑 Environment Variables
 
 Create a `.env` file in `satori/backend/` with the following variables:
