@@ -12,9 +12,7 @@ satori/
 ├── docker-compose.yml
 ├── README.md
 ├── backend/
-├── frontend/
-├── docs/
-└── prompts/
+└── frontend/
 ```
 
 ---
@@ -76,29 +74,13 @@ frontend/
 - [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/)
 - [Node.js](https://nodejs.org/)
 
-### Method 1: Two-Terminal Workflow
-
-```bash
-docker-compose up backend db
-```
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Access the app: [http://localhost:5173](http://localhost:5173)
-
----
-
-### Method 2: Pure Docker Workflow
+### Pure Docker Workflow
 
 ```bash
 docker-compose up --build
 ```
 
-Access the app: [http://localhost:3000](http://localhost:3000)
+Access the app: [http://localhost:5173](http://localhost:5173)
 
 ---
 
@@ -106,18 +88,11 @@ Access the app: [http://localhost:3000](http://localhost:3000)
 
 To use the app, you must first create the database tables and populate the questionnaire.
 
-1. Ensure your containers are running.
+From the root `satori/` directory, run:
 
-    ```bash
-    docker exec -it satori-db-1 bash 
-    docker exec -it satori-backend-1 bash 
-    ```
-
-2. From the root `satori/` directory, run:
-
-    ```bash
+```bash
     docker-compose exec backend /app/.venv/bin/python -m app.scripts.seed_questionnaire
-    ```
+```
 <!--  -->
 ---
 
@@ -126,10 +101,6 @@ To use the app, you must first create the database tables and populate the quest
 Create a `.env` file in `satori/backend/` with the following variables:
 
 ```env
-# Database URLs (these are defaults, can be kept as is for local dev)
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/satori
-TEST_DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/satori_test
-
 # Security (generate a new one for your instance)
 SECRET_KEY="<generate_with_openssl_rand_hex_32>"
 
