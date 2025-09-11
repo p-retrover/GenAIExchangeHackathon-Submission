@@ -22,7 +22,7 @@ Project Satori is a fully functional web application that guides users from unce
 
 4. **Personalized Learning Roadmaps**: The cornerstone of Satori, this feature allows users to select a career and receive a comprehensive, week-by-week plan. It details specific topics to study, skills to master, and projects to undertake over several months for proficiency.
 
-5. **Modern, Responsive Dashboard**: The experience is delivered through a clean, modern, and fully responsive interface built with React, ensuring seamless usability on desktops and mobile devices.
+5. **Conversational AI Mentor**: A new, dedicated page allows users to have a stateful conversation with an AI mentor, asking specific questions about their generated roadmap and receiving context-aware answers.
 
 ## Technical Implementation
 
@@ -32,7 +32,11 @@ Project Satori leverages a modern, scalable, and high-performance technology sta
 
 - **Frontend**: The user interface is a dynamic single-page application crafted with React and Vite for rapid development and optimized builds. Tailwind CSS ensures responsive, visually appealing styling.
 
-- **AI Engine**: Powered by the Google Gemini API, the system employs a modular agent-based architecture in the backend. This includes a RecommendationAgent for in-depth profile analysis and a RoadmapAgent for generating detailed learning plans, facilitating easy future expansions.
+- **AI Engine**: The intelligence layer is powered by the Google Gemini API, orchestrated through the LangChain framework. This agent-based architecture has been refactored for consistency and power:
+
+  - A central `llm_provider` initializes a shared instance of the Gemini model using `langchain-google-genai`.
+  - The `RecommendationAgent` and `RoadmapAgent` are stateless agents that use the shared LangChain LLM to generate their respective JSON payloads.
+  - The new `MentorAgent` is a stateful, conversational agent built using **LangChain Expression Language (LCEL)**, incorporating `ConversationBufferMemory` to remember chat history and provide context-aware responses.
 
 - **Infrastructure & DevOps**: The application is containerized with Docker and orchestrated using Docker Compose, promoting consistent, reproducible environments ideal for development and scalable deployments on platforms like Google Cloud Run.
 
