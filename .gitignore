@@ -1,0 +1,37 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.so
+*.pyc
+*.pyo
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment files (local secrets)
+.env
+.env.*
+
+# IDE / editor stuff
+.vscode/
+.idea/
+*.swp
+*~
+
+# Optional: OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker related (ignore local build artifacts, but not pyproject.toml/poetry.lock)
+docker-compose.override.yml
+docker-compose.override.yml.*.local

@@ -1,0 +1,27 @@
+# Use an ARG to define the Python version.
+ARG PYTHON_VERSION=3.13
+
+# --- STAGE 1: Builder ---
+FROM python:${PYTHON_VERSION}-slim as builder
+
+WORKDIR /app
+RUN pip install poetry
+RUN poetry config virtualenvs.in-project true
+
+COPY pyproject.toml poetry.lock ./
+
+# This is the key difference: this installs ALL dependencies, including dev.
+RUN poetry install --no-interaction --no-ansi
+
+# --- STAGE 2: Final Image ---
+FROM python:${PYTHON_VERSION}-slim
+
+WORKDIR /app
+
+COPY --from=builder /app/.venv /app/.venv
+COPY ./app ./app
+COPY alembic.ini ./
+COPY alembic ./alembic/
+
+# Set the PATH to include the virtual environment's bin directory
+ENV PATH="/app/.venv/bin:$PATH"
