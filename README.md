@@ -1,0 +1,197 @@
+# 🧠 Project Satori
+
+A full-stack, AI-powered platform built with FastAPI (backend) and React (frontend). This repository contains both the backend and frontend code, fully containerized with Docker for easy deployment.
+
+---
+
+## 📂 Repository Structure
+
+```plaintext
+satori/
+├── .gitignore
+├── docker-compose.yml
+├── README.md
+├── backend/
+├── frontend/
+├── docs/
+└── prompts/
+```
+
+---
+
+## ⚙️ Backend
+
+The backend is a self-contained FastAPI application built with Poetry for dependency management and Alembic for database migrations.
+
+```plaintext
+backend/
+├── alembic/
+├── alembic.ini
+├── app/
+│   ├── ai/
+│   │   ├── agents/
+│   │   └── models/
+│   ├── api/
+│   │   └── v1/
+│   │       ├── api.py
+│   │       └── routes/
+│   ├── core/
+│   ├── crud/
+│   ├── db/
+│   ├── models/
+│   ├── schemas/
+│   └── services/
+├── scripts/
+├── tests/
+├── Dockerfile
+├── Dockerfile.dev
+└── pyproject.toml
+```
+
+---
+
+## 🖥️ Frontend
+
+The frontend is a modern React application built with Vite, providing a fast development experience and optimized production build.
+
+```plaintext
+frontend/
+├── .gitignore
+├── Dockerfile
+├── Dockerfile.dev
+├── nginx.conf
+├── package.json
+├── vite.config.js
+└── src/
+    ├── App.jsx
+    └── index.css
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/)
+- [Node.js](https://nodejs.org/)
+
+### Method 1: Two-Terminal Workflow
+
+```bash
+docker-compose up backend db
+```
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Access the app: [http://localhost:5173](http://localhost:5173)
+
+---
+
+### Method 2: Pure Docker Workflow
+
+```bash
+docker-compose up --build
+```
+
+Access the app: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🌱 Seeding the Database
+
+To use the app, you must first create the database tables and populate the questionnaire.
+
+1. Ensure your containers are running.
+
+    ```bash
+    docker exec -it satori-db-1 bash 
+    docker exec -it satori-backend-1 bash 
+    ```
+
+2. From the root `satori/` directory, run:
+
+    ```bash
+    docker-compose exec backend /app/.venv/bin/python -m app.scripts.seed_questionnaire
+    ```
+<!--  -->
+---
+
+## 🔑 Environment Variables
+
+Create a `.env` file in `satori/backend/` with the following variables:
+
+```env
+# Database URLs (these are defaults, can be kept as is for local dev)
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/satori
+TEST_DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/satori_test
+
+# Security (generate a new one for your instance)
+SECRET_KEY="<generate_with_openssl_rand_hex_32>"
+
+# Google Gemini API
+GOOGLE_API_KEY="<your_google_ai_api_key_with_billing_enabled>"
+```
+
+---
+
+## 📈 Project Status
+
+- **Phase 1** — Backend Data Engine ✅
+- **Phase 2** — AI Agent Layer ✅
+- **Phase 3** — Frontend UI & Full-Stack Integration ✅
+- **Phase 4** — Intelligent Growth Platform (Roadmap & Recommendations) ✅ (Core Features Complete)
+- **Phase 5** — Intelligent growth platform (scalable mentor, skill tree, real-time market insights) 🛣️ (planned)
+
+---
+
+## 🧑‍💻 Development Notes
+
+- The frontend is built with **Vite and React**, providing a modern, fast development experience.
+- The backend uses **FastAPI and asynchronous SQLAlchemy 2.0**.
+- The entire architecture is containerized and ready for scalable deployment.
+
+---
+
+## 🤝 Contributing
+
+Contributions are what make a team project thrive. We follow the standard GitHub Flow for collaboration.
+
+1. **Never push directly to `main`**. The `main` branch is protected and should always be stable.
+2. For now, the `dev` branch is also protected. You must open pull requests to `dev` as well.
+3. Create a new **Branch** for your feature (`git checkout -b feature/AmazingFeature`).
+4. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+5. Push to your Branch (`git push origin feature/AmazingFeature`).
+6. Open a **Pull Request** against the `dev` branch for review (later this will change to `main`).
+
+---
+
+## 📜 License
+
+```txt
+MIT License
+
+Copyright (c) 2025 Project Satori
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
