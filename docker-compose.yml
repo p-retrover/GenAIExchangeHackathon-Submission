@@ -1,0 +1,95 @@
+# Defines the services (containers) that make up your application.
+services:
+  # The PostgreSQL database service.
+  db:
+    image: postgres:14-alpine # Using a specific, lightweight version of Postgres.
+    restart: always # Ensures the database container restarts if it crashes.
+    # Sets environment variables inside the 'db' container.
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=satori
+    # Maps port 5432 on your local machine to port 5432 inside the container.
+    ports:
+      - "5432:5432"
+    # Persists the database data on your local machine so it's not lost when the container stops.
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d satori"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # The FastAPI backend service.
+  backend:
+    # Tells Docker to build an image using the Dockerfile in the current directory ('.').
+    build: ./backend
+    # The command to run when the container starts. This starts the Uvicorn server.
+    # This command adds the '--reload' flag for development purposes, allowing live code reloading.
+    command: /app/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # Mounts the app directory on your host into the /app/app directory in the container.
+    # This allows for live reloading of your code without rebuilding the image.
+    volumes:
+      - ./backend/app:/app/app
+    # Maps port 8000 on your local machine to port 8000 inside the container.
+    ports:
+      - "8000:8000"
+
+    env_file:
+      - ./backend/.env
+    # Tells this service to wait for the 'db' service to be ready before starting.
+    depends_on:
+      db:
+        condition: service_healthy
+    # Sets the database URL for the FastAPI application inside the container.
+    # It uses the service name 'db' as the hostname.
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/satori
+
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - backend
+
+  # For live testing of frontend with hot reload
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app:z
+      - /app/node_modules
+    command: npm run dev -- --host
+    # user: "1000:1000"
+    depends_on:
+      - backend
+
+# ---for testing---
+  backend_test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+
+    volumes:
+      - ./backend/app:/app/app:z
+      - ./backend/tests:/app/tests:z
+    
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - PYTHONPATH=/app
+    # our tests will connect to the same DB service but use a different database
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/satori_test
+      # no 'command' is needed here, as tests will be run via pytest in CI/CD or locally
+# ---end for testing---
+
+# Defines the named volume used by the 'db' service for data persistence.
+volumes:
+  postgres_data:
