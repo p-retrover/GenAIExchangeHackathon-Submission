@@ -1,27 +1,30 @@
-services:
-  # 1. The PostgreSQL Database
-  - type: postgres
-    name: satori-db
+# Databases are defined in their own top-level section, separate from services.
+databases:
+  - name: satori-db
+    databaseName: satori   # Explicitly creates the 'satori' database
     postgresMajorVersion: 14
+    plan: free             # Ensures you are using the free tier
 
-  # 2. The FastAPI Backend Service
+# Services (like your backend and frontend) are defined in their own section.
+services:
+  # 1. The FastAPI Backend Service
   - type: web
     name: satori-backend
     env: docker
     dockerfilePath: ./backend/Dockerfile
     envVars:
-      # Render automatically provides the database URL from the service above
+      # Render automatically provides the database URL from the 'databases' section above
       - key: DATABASE_URL
         fromDatabase:
           name: satori-db
           property: connectionString
-      # Add your other secrets here or in the Render dashboard
+      # Add your other secrets in the Render dashboard
       - key: GOOGLE_API_KEY
-        sync: false # Mark as a secret to be added in the dashboard
+        sync: false
       - key: SECRET_KEY
-        sync: false # Mark as a secret to be added in the dashboard
+        sync: false
 
-  # 3. The React Frontend Service
+  # 2. The React Frontend Service
   - type: web
     name: satori-frontend
     env: docker
