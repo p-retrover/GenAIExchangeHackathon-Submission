@@ -72,7 +72,6 @@ frontend/
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/)
-- [Node.js](https://nodejs.org/)
 
 ### Pure Docker Workflow
 
