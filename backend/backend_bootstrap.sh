@@ -1,5 +1,4 @@
 #!/bin/bash
-# backend/backend_bootstrap.sh
 
 set -e
 
