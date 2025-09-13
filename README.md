@@ -115,6 +115,17 @@ Watch a demo of Satori in action:
 
 ---
 
+​## ⚠️ Known Issues & Next Steps
+
+​This section documents areas for improvement and challenges encountered during the hackathon. The application is fully functional in its local Docker environment.
+​1. AI Mentor Token Optimization
+​Issue: The current implementation of the AI Mentor chat includes the user's full, multi-week roadmap in the context of every single message. While functional, this is not token-efficient and could become costly with very long roadmaps.
+​Next Step: The immediate next step is to re-architect this feature using a Retrieval-Augmented Generation (RAG) pipeline. The user's roadmap will be stored in a vector database, allowing the mentor to retrieve only the most relevant sections for each specific question, drastically reducing token consumption.
+​2. Automated Cloud Deployment
+​Issue: While the application is fully containerized, we encountered platform-specific challenges deploying to a live URL. The initial, one-time database migration process (via Alembic) takes longer than the maximum startup health check timeouts on serverless platforms like Google Cloud Run. Manual migration attempts via the Cloud SQL Proxy were blocked by local network/firewall issues.
+​Next Step: The professional solution is to create a CI/CD pipeline (e.g., with Google Cloud Build or GitHub Actions). This pipeline would separate the slow migration task into its own one-time job, allowing the main web service to start instantly and pass all health checks. I want to add a new section of this. Make it to markdown
+
+---
 
 ## 🧑‍💻 Development Notes
 
