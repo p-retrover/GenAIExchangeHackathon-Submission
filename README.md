@@ -125,8 +125,7 @@ This section documents areas for improvement and challenges encountered during t
 
 2. **Automated Cloud Deployment**  
    **Issue**: While the application is fully containerized, we encountered platform-specific challenges deploying to a live URL. The initial, one-time database migration process (via Alembic) takes longer than the maximum startup health check timeouts on serverless platforms like Google Cloud Run. Manual migration attempts via the Cloud SQL Proxy were blocked by local network/firewall issues.
-
-3. **Next Step**: The professional solution is to create a CI/CD pipeline (e.g., with Google Cloud Build or GitHub Actions). This pipeline would separate the slow migration task into its own one-time job, allowing the main web service to start instantly and pass all health checks.
+    **Next Step**: The professional solution is to create a CI/CD pipeline (e.g., with Google Cloud Build or GitHub Actions). This pipeline would separate the slow migration task into its own one-time job, allowing the main web service to start instantly and pass all health checks.
 
 ---
 
