@@ -119,6 +119,7 @@ Watch a demo of Satori in action:
 
 ​This section documents areas for improvement and challenges encountered during the hackathon. The application is fully functional in its local Docker environment.
 
+
 ​1. **AI Mentor Token Optimization
 ​Issue**: The current implementation of the AI Mentor chat includes the user's full, multi-week roadmap in the context of every single message. While functional, this is not token-efficient and could become costly with very long roadmaps.
 ​Next Step: The immediate next step is to re-architect this feature using a Retrieval-Augmented Generation (RAG) pipeline. The user's roadmap will be stored in a vector database, allowing the mentor to retrieve only the most relevant sections for each specific question, drastically reducing token consumption.
