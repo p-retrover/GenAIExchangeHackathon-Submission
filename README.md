@@ -107,6 +107,15 @@ GOOGLE_API_KEY="<your_google_ai_api_key_with_billing_enabled>"
 
 ---
 
+## 🎬 Implementation Video
+
+Watch a demo of Satori in action:
+
+[![Watch the video](https://youtu.be/0-4kdqm1mLY?si=SCBzCmObD4oHNWzY)](https://youtu.be/0-4kdqm1mLY?si=SCBzCmObD4oHNWzY)
+
+---
+
+
 ## 🧑‍💻 Development Notes
 
 - The frontend is built with **Vite and React**, providing a modern, fast development experience.
