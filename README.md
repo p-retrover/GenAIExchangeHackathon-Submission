@@ -111,7 +111,7 @@ GOOGLE_API_KEY="<your_google_ai_api_key_with_billing_enabled>"
 
 Watch a demo of Satori in action:
 
-[![Watch the video](https://youtu.be/0-4kdqm1mLY?si=SCBzCmObD4oHNWzY)](https://youtu.be/0-4kdqm1mLY?si=SCBzCmObD4oHNWzY)
+[![Watch the video](https://youtu.be/trhiauB006U)](https://youtu.be/trhiauB006U)
 
 ---
 
