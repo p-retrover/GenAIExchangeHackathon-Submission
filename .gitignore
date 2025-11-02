@@ -35,3 +35,14 @@ desktop.ini
 # Docker related (ignore local build artifacts, but not pyproject.toml/poetry.lock)
 docker-compose.override.yml
 docker-compose.override.yml.*.local
+GEMINI.md
+
+#the node module and the gemini markdown file
+GEMINI.md
+node_modules
+
+# Gemini specific files
+frontend_report.md
+context_log.md
+CHANGELOG.md
+log_updates/

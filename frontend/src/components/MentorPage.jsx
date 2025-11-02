@@ -16,16 +16,16 @@ const MentorPage = () => {
     // --- END OF DEBUGGING STEP ---
 
     return (
-        <div className="min-h-screen bg-slate-900 text-white font-sans">
-            <header className="bg-slate-800 shadow-md">
+        <div className="min-h-screen bg-background text-foreground font-sans">
+            <header className="bg-card shadow-md">
                 <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
                     <div className="flex items-center space-x-2">
-                        <BrainCircuit className="text-violet-400 w-7 h-7" />
-                        <h1 className="text-xl font-bold text-white">Satori AI Mentor</h1>
+                        <BrainCircuit className="text-primary w-7 h-7" />
+                        <h1 className="text-xl font-bold text-foreground">Satori AI Mentor</h1>
                     </div>
                     <button 
                         onClick={() => navigate(-1)}
-                        className="bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-lg"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-2 px-4 rounded-lg"
                     >
                         ← Back
                     </button>

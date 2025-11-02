@@ -1,3 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+}
+
+@layer base {
+  :root {
+    --background: 255 15% 10%;
+    --foreground: 255 15% 90%;
+
+    --card: 255 15% 15%;
+    --card-foreground: 255 15% 90%;
+
+    --popover: 255 15% 15%;
+    --popover-foreground: 255 15% 90%;
+
+    --primary: 265 90% 65%;
+    --primary-foreground: 255 15% 95%;
+
+    --secondary: 255 15% 30%;
+    --secondary-foreground: 255 15% 90%;
+
+    --muted: 255 15% 20%;
+    --muted-foreground: 255 15% 60%;
+
+    --accent: 300 90% 65%;
+    --accent-foreground: 255 15% 95%;
+
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 255 15% 25%;
+    --input: 255 15% 25%;
+    --ring: 265 90% 75%;
+
+    --radius: 0.5rem;
+
+        /* >>> ADD TO :root in src/index.css (inside your @layer base :root) */
+    /* CHANGED: Add modal glass and border variables for unified glass look */
+    --modal-glass: 262 90% 10% / 18%; /* use as `bg-[color:hsla(var(--modal-glass))]` or via custom class */
+    --modal-border: 262 90% 65% / 35%;
+    /* You might also add controlled glow alpha versions if you want */
+    --modal-glow: 262 90% 65% / 30%;
+
+  }
+
+  .dark {
+    --background: 255 15% 10%;
+    --foreground: 255 15% 90%;
+
+    --card: 255 15% 15%;
+    --card-foreground: 255 15% 90%;
+
+    --popover: 255 15% 15%;
+    --popover-foreground: 255 15% 90%;
+
+    --primary: 265 90% 65%;
+    --primary-foreground: 255 15% 95%;
+
+    --secondary: 255 15% 30%;
+    --secondary-foreground: 255 15% 90%;
+
+    --muted: 255 15% 20%;
+    --muted-foreground: 255 15% 60%;
+
+    --accent: 300 90% 65%;
+    --accent-foreground: 255 15% 95%;
+
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 255 15% 25%;
+    --input: 255 15% 25%;
+    --ring: 265 90% 75%;
+  }
+}
