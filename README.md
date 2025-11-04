@@ -61,8 +61,11 @@ frontend/
 ├── package.json
 ├── vite.config.js
 └── src/
-    ├── App.jsx
-    └── index.css
+    ├── assets/
+    ├── components/
+    │   └── ui/
+    ├── lib/
+    └── services/
 ```
 
 ---
@@ -72,6 +75,8 @@ frontend/
 ### Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/)
+- **WebGL**: Make sure WebGL is enabled in your browser.
+- **Dark Mode**: Our website does not have a dedicated dark mode. If you have any dark mode extensions enabled, please disable them for the best experience.
 
 ### Pure Docker Workflow
 
@@ -111,7 +116,7 @@ GOOGLE_API_KEY="<your_google_ai_api_key_with_billing_enabled>"
 
 Watch a demo of Satori in action:
 
-[![Watch the video](https://youtu.be/trhiauB006U)](https://youtu.be/trhiauB006U)
+[![Watch the video](https://img.youtube.com/vi/wQYMEWm81xI/0.jpg)](https://youtu.be/wQYMEWm81xI)
 
 ---
 
@@ -131,7 +136,7 @@ This section documents areas for improvement and challenges encountered during t
 
 ## 🧑‍💻 Development Notes
 
-- The frontend is built with **Vite and React**, providing a modern, fast development experience.
+- The frontend is built with **Vite, React, and Tailwind CSS**, providing a modern, fast development experience.
 - The backend uses **FastAPI and asynchronous SQLAlchemy 2.0**.
 - The entire architecture is containerized and ready for scalable deployment.
 
