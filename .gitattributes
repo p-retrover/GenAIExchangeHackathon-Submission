@@ -1,0 +1,11 @@
+* text=auto eol=lf
+
+# Designate specific file types as binary to prevent corruption.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+*.pdf binary
+*.pptx binary
+*.xlsx binary
